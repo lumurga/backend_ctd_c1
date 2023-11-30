@@ -9,11 +9,10 @@ import java.time.LocalDateTime;
 public class TurnoEntradaDto {
 
     @NotNull(message = "El paciente no puede ser nulo")
-    private Long paciente;
+    private Long pacienteId;
 
     @NotNull(message = "El odontologo no puede ser nulo")
-    private Long odontologo;
-
+    private Long odontologoId;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     @FutureOrPresent(message = "La fecha no puede ser anterior al día de hoy")
     @NotNull(message = "Debe especificarse la fecha y hora del turno")
@@ -22,26 +21,26 @@ public class TurnoEntradaDto {
     public TurnoEntradaDto() {
     }
 
-    public TurnoEntradaDto(Long paciente, Long odontologo, LocalDateTime fechaYHora) {
-        this.paciente = paciente;
-        this.odontologo = odontologo;
+    public TurnoEntradaDto(Long pacienteId, Long odontologoId, LocalDateTime fechaYHora) {
+        this.pacienteId = pacienteId;
+        this.odontologoId = odontologoId;
         this.fechaYHora = fechaYHora;
     }
 
-    public Long getPaciente() {
-        return paciente;
+    public Long getPacienteId() {
+        return pacienteId;
     }
 
-    public void setPaciente(Long paciente) {
-        this.paciente = paciente;
+    public void setPacienteId(Long pacienteId) {
+        this.pacienteId = pacienteId;
     }
 
-    public Long getOdontologo() {
-        return odontologo;
+    public Long getOdontologoId() {
+        return odontologoId;
     }
 
-    public void setOdontologo(Long odontologo) {
-        this.odontologo = odontologo;
+    public void setOdontologoId(Long odontologoId) {
+        this.odontologoId = odontologoId;
     }
 
     public LocalDateTime getFechaYHora() {
