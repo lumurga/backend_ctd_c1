@@ -74,6 +74,25 @@ public class TurnoService implements ITurnoService {
         return turnoSalidaDto;
     }
 
+    @Override
+    public List<TurnoSalidaDto> listarTurnos() {
+        return null;
+    }
+
+    @Override
+    public TurnoSalidaDto buscarTurnoPorId(Long id) {
+        return null;
+    }
+
+    @Override
+    public void eliminarTurno(Long id) throws ResourceNotFoundException {
+
+    }
+
+    @Override
+    public TurnoSalidaDto modificarTurno(TurnoModificacionEntradaDto turnoModificacionEntradaDto) throws ResourceNotFoundException {
+        return null;
+    }
 
 
     private PacienteTurnoSalidaDto pacienteSalidaDtoASalidaTurnoDto(Long id) {

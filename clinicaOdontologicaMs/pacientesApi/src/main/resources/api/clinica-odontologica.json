@@ -1,0 +1,392 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8082",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/pacientes/actualizar": {
+      "put": {
+        "tags": [
+          "paciente-controller"
+        ],
+        "summary": "Actualización de un paciente",
+        "operationId": "actualizarPaciente",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PacienteModificacionEntradaDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "404": {
+            "description": "Paciente no encontrado",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "200": {
+            "description": "Paciente actualizado correctamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PacienteSalidaDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "UServer error"
+          }
+        }
+      }
+    },
+    "/pacientes/registrar": {
+      "post": {
+        "tags": [
+          "paciente-controller"
+        ],
+        "summary": "Registro de un nuevo paciente",
+        "operationId": "registrarPaciente",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PacienteEntradaDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error"
+          },
+          "201": {
+            "description": "Paciente registrado correctamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PacienteSalidaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pacientes": {
+      "get": {
+        "tags": [
+          "paciente-controller"
+        ],
+        "summary": "Listado de todos los pacientes",
+        "operationId": "listarPacientes",
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error"
+          },
+          "200": {
+            "description": "Listado de pacientes obtenido correctamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OdontologoSalidaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pacientes/{id}": {
+      "get": {
+        "tags": [
+          "paciente-controller"
+        ],
+        "summary": "Búsqueda de un paciente por Id",
+        "operationId": "obtenerPacientePorId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Paciente no encontrado",
+            "content": {}
+          },
+          "400": {
+            "description": "Id inválido",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error"
+          },
+          "200": {
+            "description": "Paciente obtenido correctamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OdontologoSalidaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pacientes/eliminar/{id}": {
+      "delete": {
+        "tags": [
+          "paciente-controller"
+        ],
+        "summary": "Eliminación de un paciente por Id",
+        "operationId": "eliminarPaciente",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Paciente no encontrado",
+            "content": {}
+          },
+          "400": {
+            "description": "Id inválido",
+            "content": {}
+          },
+          "204": {
+            "description": "Paciente eliminado correctamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DomicilioModificacionEntradaDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "calle": {
+            "type": "string"
+          },
+          "numero": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "localidad": {
+            "type": "string"
+          },
+          "provincia": {
+            "type": "string"
+          }
+        }
+      },
+      "PacienteModificacionEntradaDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "apellido": {
+            "type": "string"
+          },
+          "dni": {
+            "type": "string"
+          },
+          "fechaIngreso": {
+            "type": "string",
+            "format": "date"
+          },
+          "domicilio": {
+            "$ref": "#/components/schemas/DomicilioModificacionEntradaDto"
+          }
+        }
+      },
+      "DomicilioSalidaDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "calle": {
+            "type": "string"
+          },
+          "numero": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "localidad": {
+            "type": "string"
+          },
+          "provincia": {
+            "type": "string"
+          }
+        }
+      },
+      "PacienteSalidaDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "apellido": {
+            "type": "string"
+          },
+          "dni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaIngreso": {
+            "type": "string",
+            "format": "date"
+          },
+          "domicilio": {
+            "$ref": "#/components/schemas/DomicilioSalidaDto"
+          }
+        }
+      },
+      "DomicilioEntradaDto": {
+        "type": "object",
+        "properties": {
+          "calle": {
+            "type": "string"
+          },
+          "numero": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "localidad": {
+            "type": "string"
+          },
+          "provincia": {
+            "type": "string"
+          }
+        }
+      },
+      "PacienteEntradaDto": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string"
+          },
+          "apellido": {
+            "type": "string"
+          },
+          "dni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaIngreso": {
+            "type": "string",
+            "format": "date"
+          },
+          "domicilio": {
+            "$ref": "#/components/schemas/DomicilioEntradaDto"
+          }
+        }
+      },
+      "OdontologoSalidaDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "matricula": {
+            "type": "string"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "apellido": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

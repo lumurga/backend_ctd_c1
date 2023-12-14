@@ -1,0 +1,263 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8081",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/turnos/registrar": {
+      "post": {
+        "tags": [
+          "turno-controller"
+        ],
+        "summary": "Registro de un nuevo turno",
+        "operationId": "registrarTurno",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TurnoEntradaDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          },
+          "201": {
+            "description": "Turno registrado correctamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TurnoSalidaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/turnos": {
+      "get": {
+        "tags": [
+          "turno-controller"
+        ],
+        "summary": "Listado de todos los turnos",
+        "operationId": "listarTurnos",
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          },
+          "200": {
+            "description": "Listado de turnos obtenido correctamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TurnoSalidaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/turnos/{id}": {
+      "get": {
+        "tags": [
+          "turno-controller"
+        ],
+        "summary": "Búsqueda de un turno por Id",
+        "operationId": "obtenerTurnoPorId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Id inválido",
+            "content": {}
+          },
+          "404": {
+            "description": "Turno no encontrado",
+            "content": {}
+          },
+          "200": {
+            "description": "Turno obtenido correctamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TurnoSalidaDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/turnos/eliminar/{id}": {
+      "delete": {
+        "tags": [
+          "turno-controller"
+        ],
+        "summary": "Eliminación de un turno por Id",
+        "operationId": "eliminarTurno",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Id inválido",
+            "content": {}
+          },
+          "404": {
+            "description": "Turno no encontrado",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error"
+          },
+          "204": {
+            "description": "Turno eliminado correctamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "TurnoEntradaDto": {
+        "type": "object",
+        "properties": {
+          "pacienteId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "odontologoId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "fechaYHora": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "OdontologoTurnoSalidaDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "apellido": {
+            "type": "string"
+          }
+        }
+      },
+      "PacienteTurnoSalidaDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "apellido": {
+            "type": "string"
+          }
+        }
+      },
+      "TurnoSalidaDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "pacienteTurnoSalidaDto": {
+            "$ref": "#/components/schemas/PacienteTurnoSalidaDto"
+          },
+          "odontologoTurnoSalidaDto": {
+            "$ref": "#/components/schemas/OdontologoTurnoSalidaDto"
+          },
+          "fechaYHora": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}

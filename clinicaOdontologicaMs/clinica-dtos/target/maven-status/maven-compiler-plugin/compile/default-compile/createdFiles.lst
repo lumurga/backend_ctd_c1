@@ -1,0 +1,14 @@
+com\backend\dto\salida\paciente\DomicilioSalidaDto.class
+com\backend\dto\entrada\turno\TurnoEntradaDto.class
+com\backend\dto\salida\odontologo\OdontologoSalidaDto.class
+com\backend\dto\salida\paciente\PacienteSalidaDto.class
+com\backend\dto\entrada\modificacion\PacienteModificacionEntradaDto.class
+com\backend\dto\entrada\modificacion\TurnoModificacionEntradaDto.class
+com\backend\dto\entrada\paciente\DomicilioEntradaDto.class
+com\backend\dto\salida\turno\PacienteTurnoSalidaDto.class
+com\backend\dto\salida\turno\OdontologoTurnoSalidaDto.class
+com\backend\dto\entrada\modificacion\DomicilioModificacionEntradaDto.class
+com\backend\dto\entrada\odontologo\OdontologoEntradaDto.class
+com\backend\dto\salida\turno\TurnoSalidaDto.class
+com\backend\dto\entrada\modificacion\OdontologoModificacionEntradaDto.class
+com\backend\dto\entrada\paciente\PacienteEntradaDto.class
